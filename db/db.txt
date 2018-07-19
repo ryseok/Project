@@ -1,0 +1,482 @@
+﻿db 계정 따로 둘거면
+conn /as sysdba계정 생성
+create user auction
+identified by 1234;
+
+
+grant connect, resource  to auction;
+
+
+계정 삭제
+drop user auction cascade;
+
+
+현재 생성된 계정 확인
+select * from all_users;
+
+
+set linesize 150 
+
+
+Auction(ProJecet) > Properties > Java Build Path > ojdbc6.jar 추가
+------------------------------------------------------------------------------
+
+
+회원(구매자+판매자)
+ - 회원번호 (필요?) ------------회원가입시 받는 것 ㄴㄴ 필요 없을듯
+ - 아이디
+ - 패스워드
+ - 회원이름
+ - 이메일
+ - 주민번호
+ - 전화번호
+ - 주소
+ - 구매자, 판매자 구분 ??
+ - 계좌번호
+ - or 사용할 카드번호
+ - 총구입 가격
+ - 등급 --------------회원가입시 받는 것 ㄴㄴ
+
+
+drop table member cascade constraints;
+drop table member;
+create table member(
+        -- memno number,
+        id varchar2(20) constraint member_id_pk primary key,
+        pw varchar2(20) not null,
+        name varchar2(20) not null,
+        email varchar2(50),
+        ssn1 number(6) not null,
+        ssn2 number(7) not null,
+        phone varchar2(14), --'010-1234-5678'
+        addr varchar2(100),
+        seller varchar2(30) default '구매자', -- 값을 안넣어도 기본값이 구매자로 들어감 아니면 check(seller in('구매자','판매자','관리자')
+        card number, -- 카드, 계좌
+        total number default 0,
+        grade varchar2(20) default '일반'
+);
+
+
+--insert into member(id,pw,name,email,ssn1,ssn2,phone,addr,seller,card,total) values ('gildong','1234','홍길동','gildong@gmail.com',900203,1012345,'010-1234-5678','남터','구매자',123456789, 300000);
+insert into member(id,pw,name,email,ssn1,ssn2,phone,addr,card) values ('gildong','1234','홍길동','gildong@gmail.com',900203,1012345,'010-1234-5678','남터',123456789);
+insert into member(id,pw,name,email,ssn1,ssn2,phone,addr,seller,card,total) values ('lime', '5678', '길라임', 'lime@gmail.com', 920303, 2054321, '010-4321-8765', '고터', '구매자', 987654321, 500000);
+
+
++++++++++++++
+create table member(
+        -- memno number,
+        id varchar2(20) constraint member_id_pk primary key,
+        pw varchar2(20) not null,
+        name varchar2(20) not null,
+        email varchar2(50),
+        ssn1 number(6) not null,
+        ssn2 number(7) not null,
+        phone varchar2(14), --'010-1234-5678'
+        addr varchar2(100),
+        seller varchar2(30) default '구매자', -- 값을 안넣어도 기본값이 구매자로 들어감 아니면 check(seller in('구매자','판매자','관리자')
+        card number, -- 카드, 계좌
+        total number default 0,
+        grade varchar2(20) default '일반',
+        ask varchar2(50),
+        answer varchar2(30)
+);
+insert into member(id,pw,name,email,ssn1,ssn2,phone,addr,card,ask,answer) values ('gildong','1234','홍길동','gildong@gmail.com',900203,1012345,'010-1234-5678','남터',123456789, '좋아하는 색깔은?', '노란색');
+
+
+물품 종류  
+ - 물품 종류 번호 (2010, 2011, 2012, ...... ) 
+ - 물품 종류 (풍경화, 인물화,..........)
+
+
+drop table kind;
+create table kind(
+        stuffno number constraint type_no_pk primary key,
+        stuffkind varchar2(20) check (stuffkind in ('풍경화','인물화'))
+);
+
+
+
+
+품목 판매 승인 대기
+ - 승인번호 ? 
+ - 판매자 아이디
+ - 경매물품명
+ - 최소금액(경매)         - 경매 시작가
+ - 바로 판매 금액
+ - 채팅방 유무
+ - 처음 호가 시작 단위 ?
+
+
+ - 물품 설명(코멘트)
+ - 경매 날짜 (+경매 시간)
+ - 물품 종류
+
+
+drop table request;
+create table request(
+        auctionno number constraint request_no_pk primary key, -- requestno인데 경매예정(auctionno)가 참조
+        sellerid varchar2(20),
+        stuffname varchar2(50),
+        minprice number,
+        price number,
+        chat varchar2(4) check (chat in ('y','n')),
+        upprice number, --처음 호가 시작 단위?
+        explain varchar2(100),
+        auctiondate date,
+        stuffkind varchar2(20)
+);
+
+
+drop sequence request_seq;
+create sequence request_seq
+                start with 1
+                increment by 1
+                nocycle
+                nocache;
+
+
+insert into request values (1, 'gildong', '별이빛나는밤에', 100000, 1000000, 'y', 100000, '이 그림은 아름다운 작품입니다', '18/05/23', '풍경화');
+insert into request values (request_seq.nextval, 'lime', '모나리자', 200000, 2000000, 'y', 200000, '모나리자를 그린 그림입니다', '18/06/23', '인물화');
+
+
+경매 예정 물품
+ - 경매 번호
+ - 경매 물품명
+ - 판매자!!!!!!!!!!!!!!!11 sellerName
+ - 물품 설명(코멘트)
+ - 경매 시작가
+ - 경매 날짜 (+경매 시간)!!!!!!!!!!!!! AuctionDate
+ - 물품 종류 
+ - 채팅방 유무
+
+
+drop table future;
+create table future(
+        auctionno number constraint future_no_pk primary key,
+        stuffname varchar2(20),
+        sellerid varchar2(20),
+        minprice number,
+        selldate date,
+        stuffno number,
+        chat varchar2(20)
+);
+
+
+insert into future values (1, '별', 'gildong', 200000, '18/06/23', 2010, 'y');
+delete from future where stuffno=2010;
+
+
+현재 경매 물품
+ - 경매 번호 v
+ - 경매 물품명 v 
+ - 판매자 v 
+ - 경매 시작가 (최소 금액) v 
+ - 경매 날짜 v 
+ - 물품 종류 번호 v 
+ - 채팅방 유무
+ + 물건 등급 ? 
+
+
+drop table now;
+create table now(
+        auctionno number constraint now_no_pk primary key,
+        stuffname varchar2(20),
+        sellerid varchar2(20),
+        minprice number,
+        selldate date,
+        stuffno number,
+        chat varchar2(20),
+        grade varchar2(30)
+);
+
+
+과거 경매 물품
+ - 경매 번호
+ - 경매 물품명
+ - 판매자(아이디)
+ - 낙찰가
+ - 경매 날짜
+ - 유찰 여부
+ - 물품 종류 번호
+
+
+drop table last;
+create table last(
+        auctionno number constraint last_no_pk primary key,
+        stuffname varchar2(20) not null,
+        sellerid varchar2(20) not null,
+        price number,
+        solddate date, --selldate date,
+        success varchar2(10),
+        stuffno number
+);
+
+
+회원등급
+ - 등급 (vvip, vip, 일반)
+ - 총구입 최소 가격
+ - 총구입 최대 가격
+ - 수수료 감소율(등급별)
+
+
+drop table gradelist;
+create table gradelist(
+        grade varchar2(20) check (grade in ('vvip','vip','일반')),
+        lototal number,
+        hitotal number,
+        comm number
+);
+
+
+insert into gradelist values ('vvip', 30001, 400000, 10);
+insert into gradelist values ('vip', 200001, 300000, 5);
+insert into gradelist values ('일반', 100000, 200000, 3);
+
+
+물품가격에 따른 수수료
+ - 물품 최소가격
+ - 물품 최대 가격
+ - 수수료 %
+-----------------------------+++++++++
+회원등급에 따른 수수료
+ - 등급
+ - 수수료 %
+
+
+drop table commlist;
+create table commlist(
+        minprice number,
+        maxprice number,
+        comm number
+);
+
+
+insert into commlist values (1000, 10000, 10);
+-----------------------------
+drop table grcomm;
+create table grcomm(
+        grade varchar2(20),
+        comm number
+);
+
+
+insert into grcomm values ('vip',10);
+
+
+회원별 구매 리스트
+ - 아이디
+ - 경매번호(물품번호)
+ - 구매품명
+ - 가격
+ - 구매 날짜
+
+
+drop table buy;
+create table buy(
+        id varchar2(20) constraint buy_id_pk primary key,
+        auctionno number,
+        stuffname varchar2(20),
+        price number,
+        buydate date
+);
+
+
+즐겨찾기
+ - 구매자 아이디
+ - 판매자 아이디
+
+
+create table bookmark(
+        id varchar2(20) constraint bookmark_id_pk primary key,
+        sellerid varchar2(20)
+);
+
+
+/*
+create table bookmark(
+        sellerno number,
+        sellername varchar2(20),
+        memno number
+);
+*/
+
+
+장바구니
+ - 아이디
+ - 경매 번호
+
+
+create table basket(
+        id varchar2(20) constraint basket_id_pk primary key,
+        auctionno number references future(auctionno)
+);
+
+
+판매자 인증 대기
+ - 아이디
+ - 판매자 신청 날짜 ?
+
+
+drop table standby;
+create table standby(
+        id varchar2(20) constraint standby_id_pk primary key,
+        applydate date
+);
+
+
+판매자
+ - 판매자 아이디
+ - 수입금(총판매 가격)
+ + 등급이 필요..?
+ - 인증 여부 (인증대기 테이블있으니깐 필요XXXXXX)
+
+
+drop table seller;
+create table seller(
+        sellerid varchar2(20) constraint seller_id_pk primary key references member(id),
+        total number,
+        -- confirm varchar2(20)rs
+);
+
+
+게시판
+ - 글 번호
+ - 올린 내용
+ - 게시자
+ - 게시 날짜
+ - 공지사항 여부 (공지사항인지 일반 글)
+
+
+drop table noticelist;
+create table noticelist(
+        no number constraint noticelist_no_pk primary key,
+        content varchar2(100),
+        post varchar2(20) not null,
+        day date not null, -- sysdate
+        notice varchar2(20) check (notice in ('게시글','공지사항'))
+);
+
+
+drop sequence notice;
+create sequence notice_seq
+                start with 1
+                increment by 1
+                nocycle
+                nocache;
+
+
+insert into noticelist values (1, '안녕하세요', 'gildong', sysdate, '공지사항');
+insert into noticelist values (notice_seq.nextval, '반갑습니다', 'gildong', sysdate, '공지사항');
+
+
+회원 탈퇴 대기
+ - 회원번호 (필요.......?)
+ - 회원아이디
+ - 회원등급
+ - 탈퇴 신청 날짜
+ 
+ ( 회원 --> 회원탈퇴 --> 삭제 )
+ + 회원 정보 ?
+ - 이름
+ - 패스워드
+ - 주소
+ - 구매자, 판매자 구분 ??
+ - 주민번호
+ - 전화번호
+ - 계좌번호
+ - or 사용할 카드번호
+ - 총구입 가격
+ - 등급
+
+
+drop table leave;
+create table leave(
+        -- memno number,
+        id varchar2(20) constraint leave_id_pk primary key,
+        leavedate date,
+        name varchar2(20),
+        pw varchar2(20),
+        addr varchar2(100),
+        seller varchar2(30),
+        ssn1 number(6),
+        ssn2 number(7),
+        phone varchar2(14),
+        card number, -- 카드, 계좌
+        total number,
+        grade varchar2(20)
+);
+
+
+
+
+------------------------------------------
+신고당한 판매자 리스트
+ -아이디 
+
+
+drop table report;
+create table report(
+        -- memno number,
+        id varchar2(20) constraint report_id_pk primary key
+);
+
+
+수익금
+ - 수익금
+ - 날짜
+
+
+create table daystotal(
+        total number,
+        days date
+);
+
+
+현재 수익금(1행 1열)
+ - 현재 수익금
+
+
+create table total(
+        total number
+);
+
+
+회원별 알림 테이블
+ -아이디
+ -알림
+
+
+create table alarm(
+        id varchar2(20) constraint alarm_id_pk primary key,
+        alarm number
+);
+
+
+
+
+
+
+
+
+
+
+// 오라클에서 20개 가져오기
+SELECT * FROM 테이블 WHERE ROWNUM >= 1 AND ROWNUM <= 20;
+
+
+// 오라클 Rownum 응용 : 시작과 끝사이의 검색된 결과 20개 가져오기
+SELECT * FROM 테이블 WHERE ROWNUM >= 1 AND ROWNUM <= 20 AND 컬럼 BETWEEN 시작 AND 끝;
+
+
+
+
+
+
++++++++++++++++
+drop table adress;
+create table adress(
+        addr1 varchar2(30),
+        addr2 varchar2(30),
+        addr3 varchar2(30),
+);
+insert into address values ('서울시','강남구','서초동');
