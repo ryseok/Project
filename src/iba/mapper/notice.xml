@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
+<sqlMap namespace="notice">
+	<typeAlias alias="notice"
+		type="com.funshop.admin.vo.NoticeVO" />
+	<insert id="insert" parameterClass="notice">
+		insert into notice
+		(no,write,contents,wdate)
+		values
+		(notice_seq.nextval,#write#,#contents#,sysdate)
+	</insert>
+
+	<select id="selectAll"
+		resultClass="notice"
+		parameterClass="java.util.Map">
+		select no,write,contents,wdate
+		from notice
+		<isNotNull property="write">
+			where name like #write#
+		</isNotNull>
+	</select>
+
+	<select id="select" parameterClass="int" resultClass="notice">
+		select
+		no,write,contents,wdate
+		from notice
+		where no=#no#
+	</select>
+
+	<update id="update" parameterClass="notice">
+		update notice
+		set write=#write#,contents=#contents#
+		where no=#no#
+	</update>
+	
+	<delete id="delete" parameterClass="int">
+		delete from notice
+		where no=#no#
+	</delete>
+</sqlMap>

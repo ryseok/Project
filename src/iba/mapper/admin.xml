@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
+<sqlMap namespace="product">
+    <!--상품 추가하기-->
+    <insert id="insert" parameterClass="com.funshop.admin.vo.Product_vo">
+		insert into product (no,name,price,description,wdate)
+		values (product_seq.nextval,#name#,#price#,#description#,sysdate)
+    </insert>
+    
+    
+    
+  
+
+</sqlMap>

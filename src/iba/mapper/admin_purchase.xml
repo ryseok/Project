@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
+<sqlMap namespace="purchase">
+	<typeAlias alias="purchase"
+		type="com.funshop.admin.vo.PurchaseVO" />
+<!--
+	설명 보기 코딩 하기 위해 주석 처리함
+	buyHis_no number constraints buyHis_pk primary key, 주문번호(매출 현황에 사용예정),(제품구매에 사용예정)
+	buyHis_date date not null, 							날짜(제품구매에 사용예정)
+	member_id varchar2(20) not null, 					구매자아이디(매출 현황에 사용예정),(제품구매에 사용예정)
+	product_no number not null, 						물품번호(제품구매에 사용예정)
+	buyHis_payment number not null, 					결제금액(매출 현황에 사용예정),(제품구매에 사용예정)
+	buyHis_addr varchar2(300) not null,					배송지주소(제품구매에 사용예정)
+	buyHis_payType varchar2(30), 						결제종류(제품구매에 사용예정)
+	buyHis_payInfo varchar2(30), 						결제정보(제품구매에 사용예정)
+	buyHis_discount number default 0, 					할인금액(매출 현황에 사용예정),(제품구매에 사용예정)
+	buyHis_cond varchar2(30) 							상태(제품구매에 사용예정) 
+-->
+
+	<!--주문내역(==구매내역) 수정시 필요 -->
+	<select id="select" parameterClass="int" resultClass="purchase">
+		select
+		no,buyHis_date,member_id,product_no,
+		buyHis_payment,buyHis_addr,buyHis_payType,
+		buyHis_payInfo,buyHis_discount,buyHis_cond
+		from member
+		where no=#no#
+	</select>
+
+	<!--주문내역(==구매내역) 전체 불어오기 -->
+	<select id="selectAll" resultClass="purchase"
+		parameterClass="java.util.Map">
+		select
+		no,buyHis_date,member_id,product_no,
+		buyHis_payment,buyHis_addr,buyHis_payType,
+		buyHis_payInfo,buyHis_discount,buyHis_cond
+		from member
+		order by no desc
+	</select>
+
+	<!--주문내역(==구매내역) 수정-->
+	<update id="update" parameterClass="purchase">
+		update member
+		set
+		buyHis_addr,buyHis_cond
+		where no=#no#
+	</update>
+
+	<!--주문내역(==구매내역) 삭제-->
+	<delete id="delete" parameterClass="int">
+		delete from purchase
+		where
+		no=#no#
+	</delete>
+
+
+</sqlMap>
