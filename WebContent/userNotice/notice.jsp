@@ -13,23 +13,23 @@
 <style type="text/css">
 #title {
             display: inline-block;
-            width: 300px;
+            width: 1000px;
             height: 100%;
-            background-color: aqua;
+            background-color: white;
+            border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6;
         }
 
 #contentsView {
             display: inline-block;
-            width: 300px;
+            width: 1000px;
             height: 100%;
-            background-color: orange;
+            background-color: buttonhighlight;
         }
 </style>
 </head>
 <%--notice.jsp--%>
 <body>
-	<br><br><br><br>
-	<h1 align="center">공지사항</h1>
+	<h1 class="jumbotron text-center" >공지사항</h1>
 	<br>
 	<div align="center">	
 		<c:forEach items="${list }" var="noticeUser" varStatus="stat">
@@ -41,7 +41,7 @@
 			<div id="contents${stat.count }" class="collapse">
 			    <div id="contentsView">${noticeUser.contents}</div>					
 			</div>
-			<br><br>
+			<br>
 		</c:forEach>
 	</div>	
 </body>
