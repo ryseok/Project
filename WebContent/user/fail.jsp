@@ -5,7 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>가입처리결과</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="icon" href="/Funshop/image/favicon.ico">
 </head>
 <body class="container" style="text-align: center;">
 	회원가입 실패!!

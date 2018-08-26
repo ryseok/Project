@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="/Funshop/image/favicon.ico">
  <script type="text/javascript">
     	$(function(){
     		if("${id}"=="admin") {

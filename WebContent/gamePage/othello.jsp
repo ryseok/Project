@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>오델로</title>
-<link rel="icon" href="/Funshop/image/favicon.ico">
 <script type="text/javascript" src="/Funshop/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	if('${id }' == '') {

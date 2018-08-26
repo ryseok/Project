@@ -128,16 +128,15 @@
 
 		<!--공지사항(사용자) 목록 -->
 		<action path="/userNotice/userNotice"
-					  type="com.funshop.admin.actions.Notice_Action">
-			<forward name="list" path="/userNotice/notice.jsp"/>
+			type="com.funshop.admin.actions.Notice_Action">
+			<forward name="list" path="/userNotice/notice.jsp"></forward>
+			<!-- <forward name="insert"
+				path="/userNotice/userNotice.do?action=list" redirect="true"></forward> -->
 		</action>
 
-
-<!-- 		<action path="/userNotice/userNotice" 
-					  type="com.funshop.admin.actions.Notice_Action"
-					  forward="/userNotice/notice.jsp">
-		</action>  -->
-		
+<!-- 	<action path="/userNotice/userNotice"
+			forward="/userNotice/notice.jsp">
+		</action> -->
 
 
 

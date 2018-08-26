@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="icon" href="/Funshop/image/favicon.ico">
 <title>상품등록완료</title>
 </head>
 <body>

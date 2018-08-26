@@ -68,7 +68,7 @@ public class Notice_Action extends Action{
 			request.setAttribute("list", dao.selectPage(map2));
 			request.setAttribute("totalPage", totalPage);*/
 			
-			//userNoticelist
+			
 			forward = mapping.findForward("list");
 		} else if (action.equals("editForm")) {
 			forward = mapping.findForward("noticeList");
