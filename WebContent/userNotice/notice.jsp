@@ -54,5 +54,8 @@
 			<br>
 		</c:forEach>
 	</div>	
+	<c:forEach begin="1" end="${totalPage }" var="i">
+			[<a href="/Funshop/userNotice/userNotice.do?action=list&page=${i }">${i }</a>]
+    	</c:forEach>
 </body>
 </html>

@@ -16,6 +16,39 @@ insert into notice(no,write,contents,wdate)
 values('3','[결제 안내] M 포인트 결제 서비스 일시 중지','test2','2018-08-16');
 insert into notice(no,write,contents,wdate) 
 values('4','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+
+
+insert into notice(no,write,contents,wdate) 
+values('7','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('8','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('9','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('4','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('10','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('11','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('12','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('13','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('14','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('15','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('16','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('17','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('18','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('19','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+insert into notice(no,write,contents,wdate) 
+values('20','[Funshop 시스템 점검 안내]','test2','2018-08-16');
+
 ------------------------상품 번호(테이블에 number생성시 짝궁)
 drop sequence notice_seq;
 
