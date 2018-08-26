@@ -34,6 +34,7 @@
    pageContext.setAttribute("minePos", minePos);
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="icon" href="/Funshop/image/favicon.ico">
 <title>지뢰찾기</title>
 	<script type="text/javascript" src="/Funshop/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">

@@ -21,22 +21,20 @@
 
 	<!-- ★ sql문들이 저장되어 있는 XML을 등록 ★ -->
 	<!--회원정보 관리-->
-	<sqlMap resource="./iba/mapper/admin_member.xml" />
+	<!-- <sqlMap resource="./iba/mapper/admin_member.xml" /> -->
 
 	<!--공지사항-->
 	<sqlMap resource="./iba/mapper/admin_notice.xml" />
 	
 	<!--매출(구매금액-할인금액)-->
-	<sqlMap resource="./iba/mapper/admin_sales.xml" />
+	<!-- <sqlMap resource="./iba/mapper/admin_sales.xml" /> -->
 	
 	<!--로그인 폼-->
-	<sqlMap resource="./iba/mapper/user.xml" />
+	<!-- <sqlMap resource="./iba/mapper/user.xml" /> -->
 	
 	<!--상품등록-->
-	<sqlMap resource="./iba/mapper/adminPage.xml" />
+<!-- 	<sqlMap resource="./iba/mapper/adminPage.xml" />
 	<sqlMap resource="./iba/mapper/funshop.xml" />
-	<sqlMap resource="./iba/mapper/myPage.xml" />
-	<!--에러남 이딴거 뭐임??? 라고 메시지 뜸 ㅡㅡ -->
-	<!-- <sqlMap resource="./iba/mapper/*" /> -->
+	<sqlMap resource="./iba/mapper/myPage.xml" /> -->
 
 </sqlMapConfig>

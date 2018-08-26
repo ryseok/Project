@@ -68,12 +68,12 @@ public class NoticeDAO {
 		return false;
 	}// delete
 
-	public int selectRecordCount(int pageCount) throws SQLException {
+/*	public int selectRecordCount(int pageCount) throws SQLException {
 		// pageCount : 한 페이지에 보여질 행의수
 		return (Integer) sqlMap.queryForObject("notice.selectRecordCount", pageCount);
-	}
+	}*/
 
-	public List<NoticeVO> selectPage(Map<String, Integer> map) {
+/*	public List<NoticeVO> selectPage(Map<String, Integer> map) {
 		List<NoticeVO> list = null;
 		try {
 			long start = System.currentTimeMillis();
@@ -85,4 +85,5 @@ public class NoticeDAO {
 		}
 		return list;
 	}// selectPage
+*/
 }

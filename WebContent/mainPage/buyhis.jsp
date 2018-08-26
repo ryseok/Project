@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
  <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%-- buyhis.jsp --%>
+<link rel="icon" href="/Funshop/image/favicon.ico">
 <script>
 $(function(){
 			$("#card").hide();

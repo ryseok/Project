@@ -46,14 +46,14 @@ tr{
 				</td>
 			</tr>
 
-			<tr>
+<%-- 			<tr>
 				<th>비밀번호</th>
 				<td><input type="text"
 						   name="pw"
 						   size="32.7" value="${member.pw }" 
 						   disabled>
 				</td>
-			</tr>
+			</tr> --%>
 
 			<tr>
 				<th>이름</th>
@@ -92,7 +92,7 @@ tr{
 				</td>
 			</tr>	
 			
-			<tr>
+<%-- 			<tr>
 				<th>비밀번호 질문</th>
 				<td><input type="text"
 						   name="question"
@@ -108,7 +108,7 @@ tr{
 						   size="32.7" value="${member.answer}"
 						   disabled>
 				</td>
-			</tr>
+			</tr> --%>
 			
 			<tr>
 				<th>등급</th>

@@ -1,7 +1,5 @@
 package com.funshop.admin.dao;
 
-
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;

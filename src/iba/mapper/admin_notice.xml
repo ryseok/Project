@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
 <sqlMap namespace="notice">
-	<typeAlias alias="notice"
-		type="com.funshop.admin.vo.NoticeVO" />
+	<typeAlias alias="notice" type="com.funshop.admin.vo.NoticeVO" />
 	<insert id="insert" parameterClass="notice">
 		insert into notice
 		(no,write,contents,wdate)
@@ -42,7 +41,7 @@
 
 
 	<!-- <!--전체페이지 수 조회 -->
-	<select id="selectRecordCount" parameterClass="int"
+	<!-- <select id="selectRecordCount" parameterClass="int"
 		resultClass="int">
 		select ceil((select count(*) from notice)/#pageCount#)
 		from dual
@@ -90,7 +89,7 @@
 	     )
     where rn between 21 and 30
      
-  ]]></select> -->
+  ]]></select> --> 
 
 
 

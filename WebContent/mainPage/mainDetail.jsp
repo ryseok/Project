@@ -4,6 +4,7 @@
 <%-- mainDetail.jsp --%>
  <link type="text/css" rel="stylesheet" href="${path }/css/custom.css"> 
 <link rel="stylesheet" href="//www.thebanchan.co.kr/fo/css/gds.css" type="text/css">
+<link rel="icon" href="/Funshop/image/favicon.ico">
 <div id="bodyClear"></div>
 <script type="text/javascript">
 	$(function(){

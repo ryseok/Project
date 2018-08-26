@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ID/PW찾기</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="icon" href="/Funshop/image/favicon.ico">
 <style type="text/css">
 	#d2{
 		display: none;
