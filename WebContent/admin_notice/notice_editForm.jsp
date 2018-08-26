@@ -12,6 +12,7 @@
    a:hover {color:red; text-decoration: none;}
    a:active {color:yellow;}
    a:visited {color: skyblue;}
+   .keep-all { word-break: keep-all; }
 </style>
 <script type="text/javascript">
 function Delete() {
@@ -43,7 +44,8 @@ function Delete() {
 		<br><br>
 		<textarea rows="5" cols="35" 
 				  name="contents" 
-				  placeholder="내용 작성">${notice.contents }</textarea>
+				  placeholder="내용 작성"
+				  class="keep-all">${notice.contents }</textarea>
 		<br><br>
 		<input type="submit" value="수정" class="btn btn-success">
 		<input type="reset" value="리셋" class="btn btn-secondary">

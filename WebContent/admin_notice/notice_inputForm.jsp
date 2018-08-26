@@ -11,6 +11,9 @@
   .parent { text-align: center; }
 /*   .child { display: inline-block; } */
    a:hover {color:red; text-decoration: none;}
+.keep-all {
+  word-break: keep-all;
+}
 </style>
 </style>
 </head>
@@ -24,7 +27,7 @@
 	<form  action="noticeList.do?action=insert" method="post">
 		<input type="text" name="write" size="47.7" placeholder="제목 작성"> <br>
 		<br>
-		<textarea rows="10" cols="50" name="contents" placeholder="내용 작성"></textarea>
+		<textarea rows="10" cols="50" name="contents" placeholder="내용 작성" class="keep-all"></textarea>
 		<br>
 		<br>
 		<button class="btn btn-info">전송(DB)</button>

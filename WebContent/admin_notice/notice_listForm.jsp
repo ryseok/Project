@@ -12,7 +12,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Funshop_공지사항</title>
 <style type="text/css">
-   a:hover {color:red; text-decoration: none;}
+.selector {text-align: left;}
+.center {text-align: center;}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -28,8 +29,7 @@
 </head>
 </head>
 <%--list.jsp --%>
-<body>
-	<center>
+<body class="center">
 		<br>
 		<a href="/Funshop/admin_main/main_view.do"><h1>공지사항 : 목록</h1></a>
 		<hr class="container">
@@ -37,7 +37,7 @@
 		<br><br>
 		<input type="search" placeholder="검색" >
 		<br><br>
-		<table cellpadding="5" class="table, container">
+		<table cellpadding="5" align="center" >
 			<thead>
 				<tr bgcolor="skyblue">
 					<th>번호</th>
@@ -47,12 +47,12 @@
 					<th>수정 및 삭제</th>
 				</tr>
 			</thead>
-			<tbody id="tbody">
+			<tbody class="selector">
 				<c:forEach items="${list }" var="notice">
 					<tr>
 						<td>${notice.no }</td>
 						<td>${notice.write }</td>
-						<td>${notice.contents }</td>
+						<td class="selector">${notice.contents }</td>
 						<td><fmt:formatDate value="${notice.wdate }"
 								pattern="yyyy-MM-dd" /></td>
 						<td><a
@@ -61,21 +61,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<br><br>
-	<%-- 	<c:choose>
-      <c:when test="${param.page==totalPage}">다음</c:when>
-      <c:otherwise>
-        <a href="/Funshop/admin_notice/noticeList.do?action=list&page=${param.page+1 }">다음</a>
-      </c:otherwise>
-    </c:choose> --%>
-		<hr class="container">
-<%-- 		<c:forEach begin="1" end="${totalPage }" var="i">
-       [<a href="	?action=list&page=${i }">${i }</a>]
-    </c:forEach> --%>
-
-
-
-	</center>
 </body>
 </html>
 
