@@ -53,7 +53,7 @@
             <!-- 출력할 요소들을 넣어줍니다. -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="../img/cloth_carousel.jpg" alt="cloth">
+                    <img src="${path }/img/cloth_carousel.jpg" alt="cloth" width="2000px"	height="600px">
                     <div class="carousel-caption">
                         <h1>널 위해 준비한 옷</h1>
                         <p>어디 한 번 날아보자</p>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="carousel-item">
-                    <img src="../img/place_carousel.jpg" alt="place">
+                    <img src="${path }/img/place_carousel.jpg" alt="place" width="2000px"	height="600px">
                     <div class="carousel-caption">
                         <h1>오늘 어디갈까</h1>
                         <p>시원하게 뛰어보자</p>
@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="carousel-item">
-                    <img src="../img/food_carousel.jpg" alt="food">
+                    <img src="${path }/img/food_carousel.jpg" alt="food" width="2000px"	height="600px">
                     <div class="carousel-caption">
                         <h1>뭘 만들지 고민 마세요</h1>
                         <p>적극 추천해드리는 음식</p>

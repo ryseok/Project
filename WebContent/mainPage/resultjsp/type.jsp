@@ -16,7 +16,7 @@
 				                                <i class="fa fa-search-plus fa-3x"></i>
 				                            </div>
 				                        </div>
-				                        <img src="${path }${product.mainImg}" class="img-responsive">
+				                        <img src="${path }/img/${product.mainImg}" class="img-responsive" width="400px" height="300px">
 				                    </a>
 				           </div>
 				</c:forEach>

@@ -31,6 +31,7 @@
 	<div class="row">
 		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd; margin-top:50px" >
 			<thead>
+			<tr><td><h1 align="left" style="">리뷰</h1><hr></td></tr>
 			<tr>
 				<th style="background-color: #eeeeee; text-align: center;">번호</th>
 				<th style="background-color: #eeeeee; text-align: center;">상품이미지</th>

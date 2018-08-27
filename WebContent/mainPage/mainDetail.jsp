@@ -6,7 +6,20 @@
 <link rel="stylesheet" href="//www.thebanchan.co.kr/fo/css/gds.css" type="text/css">
 <div id="bodyClear"></div>
 <script type="text/javascript">
+		function purchase(){
+			if('${id }' == ''){
+				alert("로그인이 필요합니다");
+				location.href="/Funshop/login.do"; 
+			}else if($("#totalAmt").val()==0){
+				alert("상품을 선택해주세요!!");
+			}else{
+				frm.submit();
+			}
+		};
 	$(function(){
+		$("#typeSelect").change(function(){
+			location="${path}/mainPage/main.do";
+		});
 		$.ajax({
 			url:"${path}/mainPage.do?action=detailType",
 			data:{"detailType": "${pro.type}"},
@@ -21,29 +34,12 @@
 				return;
 			}
 			$("input#ord_qty").val(--minus);
-			/* $("#totalAmt").html(
-					$("input#ord_qty").val()*$("span.sale").text()	
-			); */
 		});
 		 $("button.plus").click(function(){
 			var plus = $("input#ord_qty").val();
 			$("input#ord_qty").val(++plus);
-			/* $("#totalAmt").html(
-					$("input#ord_qty").val()*$("span.sale").text()	
-			); */
 		}); 
-		/* $("input#ord_qty").keyup(function(){
-			$("#totalAmt").html(
-					$(this).val()*$("span.sale").text()	
-			);
-		}); */
 		
-		/* $("#totalAmt").html(
-				$("input#ord_qty").val()*$("span.sale").text()	
-		); */
-		$(":button.buy").click(function(){
-			location = "${path}/mainPage/buyhis.do";
-			});
 		$("#selectName").change(function(){
 			var selectName = $(this).val();
 			$("#inputSelect").attr("value", selectName);
@@ -53,14 +49,16 @@
 		$("#opAdd").click(function(){
 			$("table#opTable").append("<tr><th id=optionH"+(cnt1++)+">"+$("#selectName").val()+"</th><td id=optionD"+(cnt2++)+">"+$("#ord_qty").val()+"</td></tr>");
 			var price = $("#"+$('#selectName').val()).val();
-			$("#totalAmt").text(parseInt($("#totalAmt").text())+parseInt(price)*$("#ord_qty").val());
-			$("#hidTotal").val(parseInt($("#totalAmt").text())+parseInt(price)*$("#ord_qty").val());
-			
-			var optionName = $("#selectName").val();
-			var hid_input = $("#hid_"+optionName);
-			var pre_val = parseInt(hid_input.val());
-			var plus_val = parseInt($("#ord_qty").val());
-			hid_input.val(pre_val+plus_val);
+			$("#totalAmt").text(parseInt($("#totalAmt").text())+parseInt(price));
+			$("#hidTotal").val(parseInt($("#totalAmt").text()));
+			var optionName = $("#selectName").val(); //옵션명
+			var hid_input = $("#hid_"+optionName); 
+			var pre_val = parseInt(hid_input.val()); // input hidden의 val 가져오기 
+			var plus_val = parseInt($("#ord_qty").val()); // 갯수 가져오기 
+			hid_input.val(pre_val+plus_val);	// input hidden의 넣어진 값 + 추가된 갯수 
+		});
+		$(":button#sns").click(function(){
+			$("div#snsModel").show();
 		});
 	});
 </script>
@@ -76,16 +74,24 @@
 				<li><select id="typeSelect"><option>${pro.type }</option></select></li>
 			</ul>
 		</div>
+		
 		<!-- GOODS VIEW -->
 		<div class="gds_view" id="gds_view">
 			<!-- GOODS IMG. -->
 			<div class="gds_img" id="gds_img">
-				<div class="g_sell"><span class="sell"><em>이벤트<br/>특가</em></span></div>
-		<div class="g_sell"><span class="sell"><em>NEW</em></span></div>
+			<c:choose>
+				<c:when test="${special==1}">
+					<div class="g_sell"><span class="sell"><em>이벤트<br/>특가</em></span></div>
+					<div class="g_sell"><span class="sell"><em>NEW</em></span></div>
+				</c:when>
+				<c:otherwise>
+					<div class="g_sell"><span class="sell"><em>FunItem</em></span></div>
+				</c:otherwise>
+			</c:choose>
 				<div class="gd_img_bx">
 					 <div class="fade_slide gd_img" >
 						<ul class="cont">
-							<li class="active" style="background-image: url('${path }${pro.mainImg}');"></li>
+							<li class="active" style="background-image: url('${path }/img/${pro.mainImg}');"></li>
 						</ul>		
 					</div>
 				</div>
@@ -107,9 +113,32 @@
 				<!-- SCORE -->
 				<div class="gd_base">
 					<div class="g_sns">						
-						<button type="button" class="btn_sns" id="sns_lyr_open" >공유</button>
+						<button type="button" class="btn_sns" id="sns" >공유</button>
 					</div>
 				</div>
+			<div id="snsModal" class="modal">
+					<div class="modal-content">
+						<span class="close" style="align-items: right">&times;</span>
+						<p>친구들에게 알려볼까요?</p>
+						  <ul class="list-inline mb-0">
+				              <li class="list-inline-item mr-3">
+				                <a href="http://www.facebook.com">
+				                  <i class="fa fa-facebook fa-2x fa-fw"></i>
+				                </a>
+				              </li>
+				              <li class="list-inline-item mr-3">
+				                <a href="http://www.twitter.com">
+				                  <i class="fa fa-twitter fa-2x fa-fw"></i>
+				                </a>
+				              </li>
+				              <li class="list-inline-item">
+				                <a href="http://www.instagram.com">
+				                  <i class="fa fa-instagram fa-2x fa-fw"></i>
+				                </a>
+				              </li>
+          				  </ul>
+					</div>
+				</div> 
 				<!-- INFO. -->
 				<div class="gd_info">
 					<dl>
@@ -122,7 +151,7 @@
 					<dl>
 						<dt>배송정보</dt>
 						<dd class="drv">
-							<span>택배 <em>08/21(화요일)</em>부터 배송 받으실 수 있습니다.</span>
+							<span>택배 <em>08/28(화요일)</em>부터 배송 받으실 수 있습니다.</span>
 						</dd>
 					</dl>
 					<dl>
@@ -143,14 +172,15 @@
 							<div class="gd_set_sort">
 								<select id="selectName" >
 								<c:forEach items="${pdtailList }" var="pdtail" varStatus="stat">
-									<option value="${pdtail.name }">${pdtail.name }</option>
+									<option value="${pdtail.name }">${pdtail.name }--${pdtail.price }</option>
 								</c:forEach>
 								</select>
 								<c:forEach items="${pdtailList }" var="pdtail" varStatus="stat">
 									<input type="hidden" id=${pdtail.name } value="${pdtail.price }">
 								</c:forEach>
 								<input type="hidden"  name="selectName" id="inputSelect" ></input>
-								<button id="opAdd">옵션추가</button>
+								<button id="opAdd" class="btn btn-primary">옵션추가</button>
+								<button id="regularBt" class="btn btn-primary">정기구매</button>
 								<div id="opShow">
 									<table id="opTable">
 										
@@ -172,53 +202,81 @@
 				</div>
 				<!-- //AMOUNT -->
 
+<script type="text/javascript">
+	$(function(){
+		$("button#openCart").click(function(){
+			if('${id }' == ''){
+				alert("로그인이 필요합니다");
+				location.href="/Funshop/login.do"; 
+			}else{
+				$.ajax({
+					url:"${path }/myPage/basketResult.do?action=insert",
+					data:{
+						"product_no": '${pro.no}',
+						"member_id":'${id}'
+					}
+				});
+				location.href="/Funshop/myPage/basket.do";
+			}
+		});
+		$("button#purchase").on("click",function(){
+			if('${id }' == ''){
+				alert("로그인이 필요합니다");
+				location.href="/Funshop/login.do"; 
+			}else if($("#totalAmt").text()==0){
+				alert("상품을 선택해주세요!!");
+			}else{
+				frm.submit();
+			}
+		});
+		$("button#regularBt").click(function(){
+			location.href="${path}/myPage/regBuy.do"
+		});
+	});
+</script>
 				<!-- BTN. -->
 				<div class="gd_btns">
 					<!-- TOOLTIP -->
-					
-					<button type="button" class="cart" id="msg_open_cart" onclick="overpass.goodsDetail.fnGoods.clickCartOrd({cart_divi_cd:'10'}); return false;" title="장바구니 상품 알림 레이어 열기"><em>장바구니</em></button>
-					<!-- <button type="button" class="cart" disabled="disabled">장바구니</button>  -->
-					<!-- TOOLTIP showTip('lyr_msg_cart', this); -->
-					<div class="lyr_tip_wrap2" >
-						<div class="lyr_tip" id="lyr_msg_cart">
-							<span class="txt">선택한 제품이 장바구니에 담겼습니다.</span>
-							<span class="btns">
-								<a href="" class="bx" >장바구니 가기</a>
-							</span>
-							<button class="cls" type="button" onclick="hideTip('lyr_msg_cart');return false;">장바구니 제품 알림 레이어 닫기</button>
-						</div>
-					</div>
-					<form action=" ${path}/mainPage.do">
+					<button type="button" class="cart" id="openCart" title="장바구니 상품 알림 레이어 열기" ><em>장바구니</em></button>
+					 <form action=" ${path}/mainPage.do" name="frm">
 						<c:forEach items="${pdtailList }" var="pdtail" varStatus="stat">
-									<input type="hidden" name="${pdtail.name}" value="0"  id="hid_${pdtail.name}" >
+									<input type="hidden" name="${pdtail.name}" value="0"  id="hid_${pdtail.name}" > 
 						</c:forEach>
 						<input type="hidden" value="directBuy" name="action">
 						<input type="hidden" value="${pro.no}" name="productNumber">
 						<input type="hidden" id="hidTotal" name="hidTotal">
-					<button type="submit" class="buy"  title="주문하기 페이지 이동"><em>바로구매</em></button>
 					</form>
+					<button type="button" class="buy"  title="주문하기 페이지 이동" id="purchase" ><em>바로구매</em></button>
 				</div>
 				<!-- //BTN. -->
 			</div>
 			<!-- //GOODS INFO -->
 		</div>
 		<!-- GOODS VIEW -->
+		<style>
+			.detailClass{
+				text-align: center;
+				align-content: center;
+			}
+		</style>
 		<!-- GOODS CONTENT -->
 			<!-- DETAIL -->
-			<h3 class="ir">제품 상세정보</h3>
-			<div class="gd_detail">
-			<p><img alt="" src="${path }${pro.mainImg}" /></p>
+			<div class="detailClass">
+				<h3 class="ir">제품 상세정보</h3>
+				<div class="gd_detail">
+				<p><img alt="" src="${path }/img/${pro.mainImg}" /></p>
+				</div>
+				<h4>${pro.summary }</h4>
+				<p>${pro.description}</p>
+				
+				<c:forEach items="${pdtailList }" var="pdtail" varStatus="stat">
+				<div class="gd_detail">
+				<p><img alt="" src="${path }/img/${pdtail.pdImg}" /></p>
+				</div>
+				<h4>${pdtail.summary }</h4>
+				<p>${pdtail.description}</p>
+				</c:forEach>
 			</div>
-			<small>${pro.summary }</small>
-			<p>${pro.description}</p>
-			
-			<c:forEach items="${pdtailList }" var="pdtail" varStatus="stat">
-			<div class="gd_detail">
-			<p><img alt="" src="${path }${pdtail.pdImg}" /></p>
-			</div>
-			<small>${pdtail.summary }</small>
-			<p>${pdtail.description}</p>
-			</c:forEach>
 		<!-- TAB4 -->
 		<div class="gds_cont" id="gds_cont4">
 			<div class="gd_noti">
@@ -227,8 +285,8 @@
 					<ul>
 						<li>최소 구매액은 10,000원(기본 포장 비용) 부터 가능합니다.</li>
 
-						<li>결제금액 기준 <b>45,000원이상 구매시 무료배송</b>입니다.
-							<span>배송비는 할인금액 적용한 결제금액 기준 45,000원 이상은 무료배송,<br/>45,000원 미만은 일반 택배는 2,500원 /수도권 새벽직배송은 2,900원이 부가 됩니다.</span> 
+						<li>결제금액 기준 
+							<span>배송비는 할인금액 적용한 일반 택배는 2,500원 /수도권 새벽직배송은 2,900원이 부가 됩니다.</span> 
 						</li>
 
 						<li>주문마감 이전에 결제 완료시, 지정하신 희망배송일에 받을 수 있습니다. 

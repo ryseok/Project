@@ -35,13 +35,13 @@
 					<tr>
 						<td>
 							<img alt="사진 없음" src="/Funshop/img/${review.review_img } " style="width: 500px; height: auto"><br>
-							${review.review_content }
+							<br>${review.review_content }
 						</td>
 					</tr>
 				</tbody>		
 			</table>
 				<input type="button" id="toReview" class="btn btn-primary pull-left" value="목록"></input>
-				<c:if test="${review.member_id.equals(id) }">
+				<c:if test='${review.member_id.equals(id) || (id!=null && id.equals("admin"))}'>
 					<input type="button" class="btn btn-primary pull-left" value="삭제" onclick="deleteReview(${review.review_no })"></input>
 				</c:if>
 		</div>

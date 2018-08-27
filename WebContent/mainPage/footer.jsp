@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+	.footer_fun{
+	text-align: center;
+	}
+</style>
 <%-- footer.jsp --%>
 <footer class="footer bg-light">
       <div class="container">
@@ -26,17 +31,17 @@
           <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
             <ul class="list-inline mb-0">
               <li class="list-inline-item mr-3">
-                <a href="#">
+                <a href="http://www.facebook.com">
                   <i class="fa fa-facebook fa-2x fa-fw"></i>
                 </a>
               </li>
               <li class="list-inline-item mr-3">
-                <a href="#">
+                <a href="http://www.twitter.com">
                   <i class="fa fa-twitter fa-2x fa-fw"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a href="#">
+                <a href="http://www.instagram.com">
                   <i class="fa fa-instagram fa-2x fa-fw"></i>
                 </a>
               </li>
@@ -48,7 +53,7 @@
 		<dd>
 			상담가능시간 : 오전 9시 ~ 오후 6시 (토요일 및 공휴일은 휴무)<br>
 			주소 : 서울시 강남구 서초동 효령로 335 1층<br>
-			<a href="3rdProject@playdata.io">e-Mail : 3rdProject@playdata.io</a>
+			<a href="${path }/mainPage/main.do">e-Mail : 3rdProject@funshop.com</a>
 		</dd>
 	</dl>
 	<dl>
@@ -60,13 +65,13 @@
 		</dd>
 	</dl>
 </div>
-<div class="g9_copy">
-	<p>
-		펀샵은 플레이데이터에서 만든 패밀리사이트 입니다.<br>
-		(주)펀샵의 사전 서면 동의 없이 펀샵사이트의 일체의 정보, 콘텐츠 및 UI 등을 상업적 목적으로 전시, 전송, 스크래핑 등 무단 사용할 수 없습니다. <a href="#" class="underline" onclick="javascript:openTheFctMark(); return false;">콘텐츠 산업 진흥법에 따른 표시</a><br>
-	</p>
-	<p class="txt_copy">Copyright &copy; PlayData Co., Ltd. All rights reserved.</p>
-</div>
-      
+
+	<div class="footer_fun" >
+		<p>
+			펀샵은 플레이데이터에서 만든 패밀리사이트 입니다.<br>
+			(주)펀샵의 사전 서면 동의 없이 펀샵사이트의 일체의 정보, 콘텐츠 및 UI 등을 상업적 목적으로 전시, 전송, 스크래핑 등 무단 사용할 수 없습니다. <a href="#" class="" >콘텐츠 산업 진흥법에 따른 표시</a><br>
+		</p>
+		<p class="txt_copy">Copyright &copy; PlayData Co., Ltd. All rights reserved.</p>
+	</div>
     </footer>
    

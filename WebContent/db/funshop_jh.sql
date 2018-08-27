@@ -10,7 +10,7 @@ create table buyHis (
 	--buyHis_addr varchar2(300) not null,--배송지주소
 	--buyHis_payType varchar2(30), --결제종류
 	--buyHis_payInfo varchar2(30), --결제정보
-	buyHis_discount number default 0, --할인금액
+	buyHis_discount number default 0 --할인금액
 	--buyHis_cond varchar2(30) --상태
 );
 

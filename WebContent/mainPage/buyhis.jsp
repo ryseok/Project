@@ -12,33 +12,26 @@ $(function(){
 			$("#card").show();
 			$("#noBank").hide();
 			$("#stream").hide();
+			var t= $(this).val();
+			$("#buyHis_payType").val(t);
 		});
 		$("button#noBankBt").click(function(){
 			$("#noBank").show();
 			$("#card").hide();
 			$("#stream").hide();
+			var t= $(this).val();
+			$("#buyHis_payType").val(t);
 		});
 		$("button#streamBt").click(function(){
 			$("#card").hide();
 			$("#noBank").hide();
-			$("#stream").show();
+			$("#stream").show()
+			var t= $(this).val();
+			$("#buyHis_payType").val(t);
 		});
 		$("#strong").text(parseInt('${hidTotal }')+2500)
 		$("span#fee").text(parseInt('${hidTotal }')+2500)
 		$("span#lastPrice").text(parseInt('${hidTotal }')+2500)
-		
-		$("button#cardBt").click(function(){
-			$("#payType").val($(this).val());
-		});
-		$("button#streamBt").click(function(){
-			$("#payType").val($(this).val());
-		});
-		$("button#noBankBt").click(function(){
-			$("#payType").val($(this).val());
-		});
-		$("#monthly").change(function(){
-			$("#payInfo").val($(this).val);
-		});
 	});
 </script>
 <center>
@@ -74,11 +67,13 @@ $(function(){
 </td>
                     </tr></tfoot><tbody class="xans-element- xans-order xans-order-normallist center"><tr class="xans-record-">
 <td class=""><input type="checkbox"  /></td>
-                        <td class="thumb"><a href="${path }/mainPage.do?action=mainDetail${pro.no}"><img src="${path }${pro.mainImg}" alt="${pro.name }"/></a></td>
+                        <td class="thumb"><a href="${path }/mainPage.do?action=mainDetail${pro.no}"><img src="${path }/img/${pro.mainImg}" alt="${pro.name }" width="100px" height="100px"/></a></td>
                         <td class="left">
                             <a href=""><strong>${pro.name }</strong></a>
                             <div class="option ">
-										${strArr }
+										<c:forEach items="${list }" var="op">
+											${op.opName } - ${op.opNum }
+										</c:forEach>
 							</div>
                         </td>
                         <td class="right">
@@ -118,10 +113,9 @@ $(function(){
 </table>
 <hr>
         <h3>결제수단</h3>
-        <div style="border: 1px solid">
-		<button id="cardBt" value="카드결제">카드결제</button> 
-		<button id="streamBt" value="실시간계좌이체">실시간계좌이체</button> 
-		<button id="noBankBt" value="무통장입금">무통장입금</button> 
+		<button id="cardBt" value="카드결제" type="button">카드결제</button> 
+		<button id="streamBt" value="실시간계좌이체" type="button">실시간계좌이체</button> 
+		<button id="noBankBt" value="무통장입금" type="button">무통장입금</button> 
 		<input type="hidden" id="payType">
 		<input type="hidden" id="payInfo">
 		<div id="showBt">
@@ -179,7 +173,7 @@ $(function(){
 					<tbody>
 						<tr>
 						<th scope="row">입금자명</th>
-						 <td><input type="text" ></td>
+						 <td><input type="text"  id="noBankInfo"></td>
 						</tr>
 						<tr>
 						<th scope="row">입금은행</th>
@@ -199,7 +193,7 @@ $(function(){
 </colgroup>
 <tbody><tr>
 <th scope="row">예금주명</th>
-                        <td><input type="text"></td>
+                        <td><input type="text" id="streamInfo"></td>
                     </tr>
 					<tr>
 <th scope="row">에스크로</th>
@@ -210,42 +204,62 @@ $(function(){
 		</div>
 <script type="text/javascript">
 $(function(){
-	$("button#payment").click(function(){
+	$("button#payment").on("click",function(){
 		$("#paymentModal").show();
 		 var allData = {
-		"member_id": '${id}',
-		"pdetail_no": '1',
-		"product_no": '${pro.no}',
-		"buyHis_num" : '${productNum}',
-		"buyHis_payment" : parseInt('${hidTotal }')+2500,
-		"buyHis_addr" : $("#buyAddr").val(),
-		"buyHis_payType" : $("#payType").val(),
-		"buyHis_payInfo" : $("#monthly").val()
-		};  
-		$.ajax({
-			url: "${path}/mainPage.do?action=payment",
-			data: allData
-		});
+					"member_id": '${id}',
+					"buyHis_addr" : $("#buyAddr").val(),
+					"buyHis_payType" : $("#buyHis_payType").val(),
+					"buyHis_payInfo" : $("#buyHis_payInfo").val()
+					};  
+					$.ajax({
+						url: "${path}/mainPage.do?action=payment",
+						data: allData
+					});
 	});
+	$("#buyAddr").on("keyup",function(){
+		$("#buyHis_addr").val($(this).val());
+	})	;	
+	$("#streamInfo").on("keyup",function(){
+		$("#buyHis_payInfo").val($(this).val());
+	})	;	
+	$("#noBankInfo").on("keyup",function(){
+		$("#buyHis_payInfo").val($(this).val());
+	})	;	
+	$("#monthly").change(function(){
+		$("#buyHis_payInfo").val($(this).val());
+	});	
 	$("span#close").click(function(){
 		$("#paymentModal").hide();
 	});
 	$("button#check").click(function(){
 		$("#paymentModal").hide();
 		location="${path}/myPage/main.do";
-			
+	});
+	$("button#check1").click(function(){
+		$("#paymentModal").hide();
+		location="${path}/mainPage/main.do";
 	});
 });
 </script>
+	<div id="paymentLast"></div>
 		<div>
 			<p>최종결제 금액<br><span id="lastPrice"></span> </p>
-			<button id="payment">결제하기</button>	
+					<button id="payment" >결제하기</button>	
 			<div id="paymentModal" class="modal">
 			<div class="modal-content">
 				<span class="close">&times;</span>
 				<p>결제가 완료되었습니다.</p>
-				<button class="btn btn-primary" id="check" ><b>확인</b></button>
+				<button class="btn btn-primary" id="check1" type="button" ><b>메인페이지로이동</b></button>
+				<button class="btn btn-primary" id="check" type="button" ><b>마이페이지로 이동</b></button>
 			</div>
+						<input type="hidden" name="buyHis_payType" value="0" id="buyHis_payType">
+						<input type="hidden" name="buyHis_payInfo" value="0" id="buyHis_payInfo">
 			
+				<%-- <form action="${path}/mainPage.do"  	id="form">
+						<input type="hidden" name="member_id" value="${id}" >
+						<input type="hidden" name="buyHis_addr" value="0" id="buyHis_addr">
+						<input type="hidden" name="action" value="payment" id="buyHis_payInfo">
+				</form> --%>
 		</div>
         </div>

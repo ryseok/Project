@@ -24,6 +24,14 @@
 		});
 	});//document.ready
 </script>
+<script type="text/javascript">
+window.onload = function () {
+		if(${id != 'admin'}){
+			alert("로그인 하시오");
+ 		location.replace("/Funshop/mainPage/main.do");
+		}
+}
+</script>
 </head>
 <%--member_listForm.jsp--%>
 <body>

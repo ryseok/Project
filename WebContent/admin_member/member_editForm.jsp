@@ -15,6 +15,14 @@
 		location.href = "/Funshop/admin_member/delete.do?id=${member.id}";
 	}
 </script>
+<!-- <script type="text/javascript">
+window.onload = function () {
+		if(${id != 'admin'}){
+			alert("로그인 하시오");
+ 		location.replace("/Funshop/mainPage/main.do");
+		}
+}
+</script> -->
 <style type="text/css">
 .parent {
 	text-align: center;

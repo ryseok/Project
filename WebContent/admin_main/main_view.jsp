@@ -2,8 +2,13 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head> 
-<link rel="icon" href="/Funshop/image/favicon.ico">
+<head>
+<!--크롬 파비콘-->
+<!-- <link rel="icon" href="/Funshop/image/favicon.ico"> -->
+
+<!--익스플러 + 크롬 파비콘-->
+<link rel="shortcut icon" type="image/x-icon" href="/Funshop/image/favicon.ico"/>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
@@ -41,15 +46,33 @@
 	function logout() {
 		alert('로그아웃 되었습니다.');
 		location.replace('/Funshop/login.do?action=logout');
+		
 	}
+
+	
+
+
+	
+	
 </script>
+<!-- <script type="text/javascript">
+window.onload = function () {
+		if(${id != 'admin'}){
+			alert("로그인 하시오");
+ 		location.replace("/Funshop/mainPage/main.do");
+		}
+}
+</script> -->
 <title>Funshop_관리자 메인</title>
 </head>
-<body >
+<body>
 	<!-- Nav tabs -->
 	<div class="container mt-3">
 		<!--로그아웃 클릭시 메인 페이지 이동-->
-		<h2>관리자 페이지 <button id="bt"  onclick="logout()" class="btn btn-danger">로그아웃</button></h2>
+		<h2>
+			관리자 페이지
+			<button id="bt" onclick="logout()" class="btn btn-danger">로그아웃</button>
+		</h2>
 		<br>
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link active"
@@ -61,7 +84,7 @@
 		</ul>
 
 		<!-- Tab panes -->
- 		<div id="view" class="tab-content">
+		<div id="view" class="tab-content">
 			<br>
 			<h3>&#169;Funshop 주식회사</h3>
 		</div>

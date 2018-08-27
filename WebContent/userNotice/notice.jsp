@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="icon" href="/Funshop/image/favicon.ico">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,7 +20,6 @@
             background-color: white;
             border-top:1px solid #9C9C9C; border-bottom:1px solid #F6F6F6;
         }
-
 #contentsView {
             display: inline-block;
             width: 1000px;

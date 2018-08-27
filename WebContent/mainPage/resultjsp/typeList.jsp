@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%-- typeList.jsp --%>
-${detailType}
+<%-- ${detailType} --%>
 <c:forEach items="${typeList}" var="type">
 	<c:choose>
 		<c:when test="${detailType==type}">

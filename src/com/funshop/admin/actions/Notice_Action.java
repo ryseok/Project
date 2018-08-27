@@ -23,7 +23,7 @@ public class Notice_Action extends Action{
 		String write = request.getParameter("write");
 		
 		//액션이 잘 들어 왔는지 확인
-		System.out.println("action=" + action);
+		System.out.println("action공지사항=" + action);
 
 		NoticeDAO dao = new NoticeDAO();
 		Map<String, Object> map = new HashMap<>();
